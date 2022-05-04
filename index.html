@@ -3,27 +3,45 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" href="styles.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Calculator</title>
     </head>
     <body>
         <h1 class="display">32141231 + 1312412</h1>
-        <button class="button1">1</button>
-        <button class="button2">2</button>
-        <button class="button3">3</button>
-        <button class="button4">4</button>
-        <button class="button5">5</button>
-        <button class="button6">6</button>
-        <button class="button7">7</button>
-        <button class="button8">8</button>
-        <button class="button9">9</button>
-        <button class="button0">0</button>
+        <button class="clear">Clear</button>
+        <div class="buttons">
+            <div class="numbers">
+                <div class="row789">
+                    <button class="button7">7</button>
+                    <button class="button8">8</button>
+                    <button class="button9">9</button>
+                </div>
 
-        <button class="button+">+</button>
-        <button class="button-">-</button>
-        <button class="button*">*</button>
-        <button class="button/">/</button>
-        <button class="button=">=</button>
+                <div class="row456">
+                    <button class="button4">4</button>
+                    <button class="button5">5</button>
+                    <button class="button6">6</button>
+                </div>
+
+                <div class="row123">
+                    <button class="button1">1</button>
+                    <button class="button2">2</button>
+                    <button class="button3">3</button>
+                </div>
+
+                <div>
+                    <button class="button0">0</button>
+                </div>
+            </div>
+            <div class="operators">
+                <button class="button+">+</button>
+                <button class="button-">-</button>
+                <button class="button*">*</button>
+                <button class="button/">/</button>
+                <button class="button=">=</button>
+            </div>
+        </div>
         <script src="main.js"></script>
     </body>
 </html>
