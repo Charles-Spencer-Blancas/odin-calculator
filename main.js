@@ -11,8 +11,8 @@ const divide = (num1, num2) => {
 };
 
 const operate = (mathString) => {
-    let leftNum = parseFloat(mathString.match(/^[0-9]+/g)[0]);
-    let rightNum = parseFloat(mathString.match(/[0-9]+$/g)[0]);
+    let leftNum = parseFloat(mathString.match(/^[0-9]+\.?[0-9]*/g)[0]);
+    let rightNum = parseFloat(mathString.match(/[0-9]+\.?[0-9]*$/g)[0]);
     let operator = mathString.match(/[+\/*\-]/g)[0];
 
     switch (operator) {
@@ -47,7 +47,9 @@ const enableEquals = () => (document.querySelector('.equals').disabled = false);
 const disableEquals = () => (document.querySelector('.equals').disabled = true);
 
 const addPressedToDisplay = (e) => {
-    if (!display.textContent) enableOperators();
+    if (!display.textContent) {
+        enableOperators();
+    }
     if (e.target.className == 'button operator') {
         disableOperators();
     }
@@ -56,16 +58,18 @@ const addPressedToDisplay = (e) => {
         display.textContent[display.textContent.length - 1] == '-' ||
         display.textContent[display.textContent.length - 1] == '/' ||
         display.textContent[display.textContent.length - 1] == '*'
-    )
+    ) {
         enableEquals();
+        enableOperators();
+    }
 
     display.textContent += e.target.textContent;
 };
 
-const buttons = document.querySelectorAll('.button');
+const numbers = document.querySelectorAll('.number');
 
-buttons.forEach((button) =>
-    button.addEventListener('click', addPressedToDisplay)
+numbers.forEach((number) =>
+    number.addEventListener('click', addPressedToDisplay)
 );
 
 // Clear button
@@ -78,8 +82,20 @@ const clear = () => {
 document.querySelector('.clear').addEventListener('click', clear);
 
 // Equals button
-document.querySelector('.equals').addEventListener('click', () => {
+const calculate = () => {
     const answer = operate(display.textContent);
-    console.log(answer);
-    clear();
-});
+    display.textContent = answer;
+    disableEquals();
+};
+
+document.querySelector('.equals').addEventListener('click', calculate);
+
+// Operators
+
+document.querySelectorAll('.operator').forEach((operator) =>
+    operator.addEventListener('click', (e) => {
+        if (!document.querySelector('.equals').disabled) calculate();
+
+        addPressedToDisplay(e);
+    })
+);
